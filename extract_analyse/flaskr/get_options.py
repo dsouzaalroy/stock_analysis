@@ -4,6 +4,7 @@ import math
 import yfinance as yf
 import pandas as pd
 import numpy as np
+from yahooquery import Ticker
 from scipy.stats import norm
 from flask import (
     Blueprint, jsonify, request
@@ -36,10 +37,18 @@ def get_expiry_dates():
     return jsonify(stock.options)
 
 
+@bp.route('/getPrice', methods=('GET', ))
+def get_current_price():
+    stock_name = request.args.get('name')
+    stock = Ticker(stock_name)
+
+    current_price = stock.price.get(stock_name)['regularMarketPrice']
+    return jsonify(current_price)
+
 def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: str):
     current_price = stock.history(period='1d')['Close'][0]
     # TODO Uncomment the below line once its fixed on yfinance
-    risk_free_ir = 0.05  # yf.Ticker('IRX').info['regularMarketPrice'] / 100
+    risk_free_ir = Ticker('IRX').price.get('IRX')['regularMarketPrice'] / 100
     time_to_expire = get_time_to_expiration(expiration_date)
     d1 = compute_d1(opt_chain, current_price, risk_free_ir, time_to_expire)
     d2 = compute_d2(d1, opt_chain, time_to_expire)
