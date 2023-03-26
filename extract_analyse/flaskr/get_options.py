@@ -41,9 +41,10 @@ def get_expiry_dates():
 def get_current_price():
     stock_name = request.args.get('name')
     stock = Ticker(stock_name)
-
-    current_price = stock.price.get(stock_name)['regularMarketPrice']
-    return jsonify(current_price)
+    stock_info = stock.price.get(stock_name)
+    current_price = stock_info['regularMarketPrice']
+    currency = stock_info['currency']
+    return jsonify({'price': current_price, 'currency': currency})
 
 
 def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: str):
