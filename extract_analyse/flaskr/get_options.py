@@ -45,6 +45,7 @@ def get_current_price():
     current_price = stock.price.get(stock_name)['regularMarketPrice']
     return jsonify(current_price)
 
+
 def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: str):
     current_price = stock.history(period='1d')['Close'][0]
     # TODO Uncomment the below line once its fixed on yfinance

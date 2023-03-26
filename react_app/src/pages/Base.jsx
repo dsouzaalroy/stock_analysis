@@ -2,6 +2,7 @@ import '../css/base.scss'
 import Examples from '../components/Examples';
 import Expiry from '../components/Expiry'
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 
@@ -9,16 +10,33 @@ import { useEffect, useState } from 'react';
 function Base(){
 
     const [expires, setExpires] = useState([{value:'', label :''}])
-    const [option, setOption] = useState('')
+    const [option, setOption] = useState('');
+    const [price, setPrice] = useState('');
 
     const handleChildResponse = (value, response) =>{
         setExpires(response);
         setOption(value);
+        getPrice(value);
+        // console.log(value)
     }
 
-    useEffect(() =>{
-        console.log(expires)
-    })
+    const getPrice = (option) =>{
+        axios.get(`http://127.0.0.1:5000/finance/getPrice?name=${option}`)
+            .then((response) =>{
+                console.log(response)
+                setPrice(response.data);
+            })
+    }
+
+    // useEffect(() =>{
+    //     if(option == null){
+    //         axios.get(`http://127.0.0.1:5000/finance/getPrice?name=${option}`)
+    //         .then((response) =>{
+    //             setPrice(response);
+    //             console.log(response)
+    //         })
+    //     }
+    // },[option])
 
     return(
     <div className="basepage">
@@ -29,9 +47,9 @@ function Base(){
 
         </div>
         <div className='options_row'>
-            <div id='options'>Price</div>
+            <div id='options'>Price: {price}</div>
             <div id='options' className='expiry_content'>
-                <a >Expiry Dates</a>
+                <div>Expiry Dates</div>
                 <Expiry currentOption={option} expires={expires}/>
             </div>
             <div id='options'>
