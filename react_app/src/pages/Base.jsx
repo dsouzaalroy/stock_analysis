@@ -55,6 +55,7 @@ function Base(){
             <div id='options'>
                 <Examples onChildResponse={handleExampleResponse}/>
             </div>
+            <div></div>
             <div id='options'>
                 <button  onClick={getOptionsAnalysis} className='compute_button'>Compute</button>
             </div>

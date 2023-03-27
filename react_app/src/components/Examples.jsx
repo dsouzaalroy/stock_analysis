@@ -21,9 +21,9 @@ function Examples(props){
         return expiryOptions
     }
     const options = [
-        { value: 'MSFT', label: 'MSFT' },
+        { value: 'BCS', label: 'BCS' },
         { value: 'AAPL', label: 'AAPL' },
-        { value: 'TSLA', label: 'TSLA' }
+        { value: 'TSLA', label: 'TSLA' },
     ];
 
     useEffect(() =>{

@@ -5,12 +5,12 @@ function Expiry({
     onDateChange, expires = [{value:'', label :''}]
 }){
         
-    const [isDisabled, setIsDisabled] = useState(true);
+    // const [isDisabled, setIsDisabled] = useState(true);
 
-    useEffect(() =>{
-        if(!expires[0].value==''){
-            setIsDisabled(false)}
-    },[expires])
+    // useEffect(() =>{
+    //     if(!expires[0].value==''){
+    //         setIsDisabled(false)}
+    // },[expires])
 
     const handlechange = (date) =>{
         onDateChange(date)
@@ -22,10 +22,10 @@ function Expiry({
         <div>
             <Select 
             options={expires}
-            isDisabled={isDisabled}
+            // isDisabled={isDisabled}
             placeholder={'YYYY-MM-DD'}
             onChange={handlechange}
-            // defaultValue={options[0].value}
+            defaultValue={expires[0].value}
             className='select'
             // styles={{
             //     control: (baseStyles, state) => ({

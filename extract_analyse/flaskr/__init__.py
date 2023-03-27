@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_cors import CORS
+from extract_analyse.flaskr.commons.extensions import cache
 from . import get_options
 
 
@@ -22,6 +23,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    cache.init_app(app, config={'CACHE_TYPE': 'simple'})
     app.register_blueprint(get_options.bp)
 
     return app
+
+
+if __name__ == '__main__':
+    create_app().run(host="0.0.0.0", port=5000)
