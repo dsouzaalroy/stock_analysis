@@ -3,62 +3,70 @@ import Examples from '../components/Examples';
 import Expiry from '../components/Expiry'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-
-
+import Table from '../components/Table';
 
 function Base(){
 
     const [expires, setExpires] = useState([{value:'', label :''}])
+    const [date, setDate] = useState('')
+    const [calls, setCalls] = useState(null);
+    const [puts, setPuts] = useState(null);
     const [option, setOption] = useState('');
     const [price, setPrice] = useState('');
 
-    const handleChildResponse = (value, response) =>{
+    const handleExampleResponse = (value, response) =>{
         setExpires(response);
         setOption(value);
         getPrice(value);
-        // console.log(value)
     }
 
     const getPrice = (option) =>{
         axios.get(`http://127.0.0.1:5000/finance/getPrice?name=${option}`)
             .then((response) =>{
-                console.log(response)
                 setPrice(response.data);
             })
     }
 
-    // useEffect(() =>{
-    //     if(option == null){
-    //         axios.get(`http://127.0.0.1:5000/finance/getPrice?name=${option}`)
-    //         .then((response) =>{
-    //             setPrice(response);
-    //             console.log(response)
-    //         })
-    //     }
-    // },[option])
+    const getOptionsAnalysis = async () =>{
+        await axios.get(`http://127.0.0.1:5000/finance/optionsAnalysis?name=${option}&date=${date}`)
+        .then((response) =>{
+            console.log(response)
+            setCalls(response.data.calls)
+            setPuts(response.data.puts)
+        })
+    }
+
+    const handleExpiryResponse = (date) =>{
+        setDate(date.value);
+    }
 
     return(
     <div className="basepage">
         <div className='header'>
             <div className='header big_header'>Options Modeling</div>
             <div className='header small_header'>using Black-Scholes</div>
-
-
         </div>
         <div className='options_row'>
-            <div id='options'>Price: {price}</div>
+            <div id='options'>Price: {price.price} {price.currency}</div>
             <div id='options' className='expiry_content'>
-                <div>Expiry Dates</div>
-                <Expiry currentOption={option} expires={expires}/>
+                <div >Expiry Dates</div>
+                <Expiry onDateChange={handleExpiryResponse} expires={expires}/>
             </div>
             <div id='options'>
-                <Examples onChildResponse={handleChildResponse}/>
+                <Examples onChildResponse={handleExampleResponse}/>
             </div>
-            <div id='options'>Search</div>
+            <div id='options'>
+                <button  onClick={getOptionsAnalysis} className='compute_button'>Compute</button>
+            </div>
         </div>
-        <div>Table</div>
-
+        <div className='table calls'>
+            <div className='call_put'>Calls</div>
+            <Table options_data={calls}/>
+        </div>
+        <div className='table puts'>
+            <div className='call_put'>Puts</div>
+            <Table options_data={puts}/>
+        </div>
 
 
     </div>

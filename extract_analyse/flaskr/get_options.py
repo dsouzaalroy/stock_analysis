@@ -50,7 +50,7 @@ def get_current_price():
 def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: str):
     current_price = stock.history(period='1d')['Close'][0]
     # TODO Uncomment the below line once its fixed on yfinance
-    risk_free_ir = Ticker('IRX').price.get('IRX')['regularMarketPrice'] / 100
+    risk_free_ir = 0.05  #Ticker('IRX').price.get('IRX')['regularMarketPrice'] / 100
     time_to_expire = get_time_to_expiration(expiration_date)
     d1 = compute_d1(opt_chain, current_price, risk_free_ir, time_to_expire)
     d2 = compute_d2(d1, opt_chain, time_to_expire)
@@ -58,7 +58,8 @@ def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: st
     opt_chain['callPrice'] = current_price * norm.cdf(d1) - opt_chain['strike'] * np.exp(
         -risk_free_ir * time_to_expire) * norm.cdf(d2)
 
-    opt_chain.drop(columns=['volume', 'change', 'contractSize', 'currency'], axis=1, inplace=True)
+    opt_chain.drop(columns=['volume', 'change', 'contractSize', 'currency', 'percentChange', 'inTheMoney',
+                            'lastTradeDate', 'lastPrice'], axis=1, inplace=True)
     return opt_chain
 
 
