@@ -32,7 +32,7 @@ function Examples(props){
 
 
     const handlechange = async option =>{
-        await axios.get(`http://127.0.0.1:5000/finance/getExpiry?name=${option.value}`)
+        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getExpiry?name=${option.value}`)
         .then((response)=>{
             props.onChildResponse(option.value, createExpiryOptions(response.data))
         })

@@ -21,14 +21,14 @@ function Base(){
     }
 
     const getPrice = (option) =>{
-        axios.get(`http://127.0.0.1:5000/finance/getPrice?name=${option}`)
+        axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getPrice?name=${option}`)
             .then((response) =>{
                 setPrice(response.data);
             })
     }
 
     const getOptionsAnalysis = async () =>{
-        await axios.get(`http://127.0.0.1:5000/finance/optionsAnalysis?name=${option}&date=${date}`)
+        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/optionsAnalysis?name=${option}&date=${date}`)
         .then((response) =>{
             console.log(response)
             setCalls(response.data.calls)
