@@ -15,12 +15,12 @@ bp = Blueprint('stock_data', __name__, url_prefix='/finance')
 
 @bp.route('/optionsAnalysis', methods=('GET',))
 def get_options_chain():
-    stock_name = request.args.get('name')
-    date = request.args.get('date')
+    stock_name = request.args.get('name')  # 'MSFT'
+    date = request.args.get('date')  # '2023-04-14'
 
     stock = yf.Ticker(stock_name)
 
-    current_chain = stock.option_chain()
+    current_chain = stock.option_chain(date)
     # Convert the DataFrame to a JSON format
     calls = black_scholes(stock, current_chain.calls, date)
     puts = black_scholes(stock, current_chain.puts, date)
