@@ -15,7 +15,7 @@ bp = Blueprint('stock_data', __name__, url_prefix='/finance')
 
 
 @bp.route('/optionsAnalysis', methods=('GET',))
-@cache.cached(timeout=240)
+# @cache.cached(timeout=240)
 def get_options_chain():
     stock_name = request.args.get('name')  # 'MSFT'
     date = request.args.get('date')  # '2023-04-14'
@@ -32,7 +32,7 @@ def get_options_chain():
 
 
 @bp.route('/getExpiry', methods=('GET',))
-@cache.cached(timeout=240)
+# @cache.cached(timeout=240)
 def get_expiry_dates():
     stock_name = request.args.get('name')
     stock = yf.Ticker(stock_name)
@@ -41,7 +41,7 @@ def get_expiry_dates():
 
 
 @bp.route('/getPrice', methods=('GET', ))
-@cache.cached(timeout=240)
+# @cache.cached(timeout=240)
 def get_current_price():
     stock_name = request.args.get('name')
     stock = Ticker(stock_name)
@@ -51,7 +51,7 @@ def get_current_price():
     return jsonify({'price': current_price, 'currency': currency})
 
 
-@cache.memoize()
+# @cache.memoize()
 def black_scholes(stock: yf.Ticker, opt_chain: pd.DataFrame, expiration_date: str):
     current_price = stock.history(period='1d')['Close'][0]
     # TODO Uncomment the below line once its fixed on yfinance
