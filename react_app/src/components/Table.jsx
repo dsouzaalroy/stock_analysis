@@ -66,46 +66,49 @@ function Table({options_data}){
             field: 'contractSymbol', 
             headerName: 'Contract', 
             headerAlign: 'center',
-            width: 350 },
+            flex: 1.5,
+        },
         { 
             field: 'ask',
             headerName: 'Ask Price',
             type: 'number',
             headerAlign: 'center',
-            width: 250 },
+            flex: 1,
+        },
         { 
             field: 'bid',
             headerName: 'Bid Price',
             type: 'number',
             headerAlign: 'center',
-            width: 250 },
+            flex: 1,
+        },
         {
             field: 'strike',
             headerName: 'Strike Price',
             headerAlign: 'center',
             type: 'number',
-            width: 250,
+            flex: 1,
         },
         {
             field: 'openInterest',
             headerName: 'Open Interest',
             type: 'number',
             headerAlign: 'center',
-            width: 300,
+            flex: 1,
         },
         {
             field: 'impliedVolatility',
             headerName: 'Volatility',
             type: 'number',
             headerAlign: 'center',
-            width: 250,
+            flex: 1,
         },
         {
             field: 'callPrice',
             headerName: 'Call Price',
             type: 'number',
             headerAlign: 'center',
-            width: 250,
+            flex: 1,
         },
       ];
 
@@ -119,14 +122,10 @@ function Table({options_data}){
             rowsPerPageOptions={[5]}
             className='tables'
             sx={{
-                // boxShadow: 2,
-                // border: 2,
-                // borderColor: 'primary.light',
-                // '& .MuiDataGrid-cell:hover': {
-                //   color: 'primary.main',
-                // },
                 fontFamily:'Poppins',
-                fontWeight:'300'
+                fontWeight:'300',
+                bgcolor: 'black',
+                borderRadius: 2,
 
             }}
           />

@@ -13,6 +13,9 @@ function Base(){
     const [puts, setPuts] = useState(null);
     const [option, setOption] = useState('');
     const [price, setPrice] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [buttonStyle, setButtonStyle] = useState({});
 
     const handleExampleResponse = (value, response) =>{
         setExpires(response);
@@ -20,25 +23,35 @@ function Base(){
         getPrice(value);
     }
 
-    const getPrice = (option) =>{
-        axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getPrice?name=${option}`)
+    const getPrice = async (option) =>{
+        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getPrice?name=${option}`)
             .then((response) =>{
                 setPrice(response.data);
             })
     }
 
     const getOptionsAnalysis = async () =>{
+        setIsLoading(true)
         await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/optionsAnalysis?name=${option}&date=${date}`)
         .then((response) =>{
             console.log(response)
             setCalls(response.data.calls)
             setPuts(response.data.puts)
         })
+        setIsLoading(false)
     }
 
     const handleExpiryResponse = (date) =>{
         setDate(date.value);
     }
+    
+    const handleIsLoading = (load) =>{
+        setIsLoading(load);
+    }
+
+    useEffect(() =>{
+        setButtonDisabled(date=='' || date==null ? true : false)
+    }, [date])
 
     return(
     <div className="basepage">
@@ -50,14 +63,25 @@ function Base(){
             <div id='options'>Price: {price.price} {price.currency}</div>
             <div id='options' className='expiry_content'>
                 <div >Expiry Dates</div>
-                <Expiry onDateChange={handleExpiryResponse} expires={expires}/>
+                <Expiry 
+                isLoading={isLoading}
+                setIsLoading={handleIsLoading} 
+                onDateChange={handleExpiryResponse} 
+                expires={expires}/>
             </div>
             <div id='options'>
-                <Examples onChildResponse={handleExampleResponse}/>
+                <Examples
+                isLoading={isLoading}
+                setIsLoading={handleIsLoading} 
+                onChildResponse={handleExampleResponse}/>
             </div>
             <div></div>
             <div id='options'>
-                <button  onClick={getOptionsAnalysis} className='compute_button'>Compute</button>
+                <button 
+                disabled={buttonDisabled} 
+                onClick={getOptionsAnalysis} 
+                className='compute_button'
+                >Compute</button>
             </div>
         </div>
         <div className='table calls'>

@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-function Examples(props){
+function Examples({onChildResponse, setIsLoading, isLoading}){
     
-    const [isLoading, setIsLoading] = useState(false)
+    // const [isLoading, setIsLoading] = useState(false)
 
 
     function createExpiryOptions(expiryDates){
@@ -32,10 +32,12 @@ function Examples(props){
 
 
     const handlechange = async option =>{
+        setIsLoading(true)
         await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getExpiry?name=${option.value}`)
         .then((response)=>{
-            props.onChildResponse(option.value, createExpiryOptions(response.data))
+            onChildResponse(option.value, createExpiryOptions(response.data))
         })
+        setIsLoading(false)
 
     }
     
@@ -43,17 +45,34 @@ function Examples(props){
     return(
         <div>
             <Select 
-            defaultValue={options[0]}
+            // defaultValue={options[0]}
+            placeholder='Ticker'
             options={options}
             onChange={handlechange}
             isLoading={isLoading}
+            isDisabled={isLoading}
             className='select'
-            // styles={{
-            //     control: (baseStyles, state) => ({
-            //       ...baseStyles,
-            //       marginTop:'5vw',
-            //     }),
-            //   }}
+            styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  backgroundColor:state.isDisabled ? '#808080': 'black',
+                }),
+                option: (baseStyles, state) =>({
+                    ...baseStyles,
+                    backgroundColor:state.isFocused ? 'white': 'black',
+                    color:state.isFocused ? 'black': 'white'
+                }),
+                singleValue: (baseStyles, state) =>({
+                    ...baseStyles,
+                    // backgroundColor:'black',
+                    color:'white'
+                }),
+                menu: (baseStyles, state) =>({
+                    ...baseStyles,
+                    backgroundColor: 'black',
+                    // color:state.isFocused ? 'black': 'white'
+                }),
+              }}
             />
         </div>
     )

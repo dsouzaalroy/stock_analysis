@@ -2,37 +2,52 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 
 function Expiry({
-    onDateChange, expires = [{value:'', label :''}]
+    onDateChange, setIsLoading, isLoading, expires = [{value:'', label :''}]
 }){
         
-    // const [isDisabled, setIsDisabled] = useState(true);
-
-    // useEffect(() =>{
-    //     if(!expires[0].value==''){
-    //         setIsDisabled(false)}
-    // },[expires])
+    const [date, setDate] = useState(true);
 
     const handlechange = (date) =>{
         onDateChange(date)
+        setDate(date)
     }
-
+    
+    useEffect(() =>{
+        setDate('')
+        onDateChange('')
+    }, [expires])
 
 
     return(
         <div>
             <Select 
             options={expires}
-            // isDisabled={isDisabled}
+            value={date}
+            isDisabled={isLoading}
+            isLoading={isLoading}
             placeholder={'YYYY-MM-DD'}
             onChange={handlechange}
-            defaultValue={expires[0].value}
             className='select'
-            // styles={{
-            //     control: (baseStyles, state) => ({
-            //       ...baseStyles,
-            //       marginBottom:'1.000vw',
-            //     }),
-            //   }}
+            styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  backgroundColor: state.isDisabled ? '#808080': 'black',
+                }),
+                option: (baseStyles, state) =>({
+                    ...baseStyles,
+                    backgroundColor:state.isFocused ? 'white': 'black',
+                    color:state.isFocused ? 'black': 'white'
+                }),
+                singleValue: (baseStyles, state) =>({
+                    ...baseStyles,
+                    // backgroundColor:'black',
+                    color:'white'
+                }),
+                menu: (baseStyles, state) =>({
+                    ...baseStyles,
+                    backgroundColor: 'black',
+                }),
+              }}
             />
         </div>
     )
