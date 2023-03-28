@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    font-weight: 400;
+    margin-top: 0.5vw;
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    margin-top: 2vw;
+    font-family: 'Poppins';
+    font-weight: 200;
+}
+
+
+.small_header{
+    font-size: 1.5vw;
+    font-weight: 200;
+    margin-top: 2vw;
+}
+
+.basepage{
+    font-family: 'Poppins';
+}
+
+.options_row{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2vw;
+}
+
+.expiry_content{
+    display: flex;
+    justify-content: space-between;
+    margin: 1vw, 1vw, 1vw, 1vw
+}
+
+div,a{
+    color: white;
+    font-size: 1.2vw;
+    // margin-top: auto;
+
+}
+#options{
+    margin-left: 5vw;
+    margin-right: 5vw;
+    // margin-top: 2vw;
+    // margin-top: auto;
+    font-weight: 200;
+
+}
+
+.call_put{
+    margin-right: 2vw;
+    font-weight: bold;
+}
+
+.compute_button{
+    text-align: center;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    outline-color: currentcolor !important;
+    background-color: black;
+    min-height: 100%;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    // transition: all 100ms;
+    font-size: 1.2vw;
+    font-family: 'Poppins';
+    font-weight: 200;
+    color: white;
+}
+
+.compute_button:disabled, .compute_button:disabled:hover{
+    text-align: center;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-sizing: border-box;
+    outline-color: currentcolor !important;
+    background-color: grey;
+    min-height: 100%;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    // transition: all 100ms;
+    font-size: 1.2vw;
+    font-family: 'Poppins';
+    font-weight: 200;
+    color: white;
+}
+
+.compute_button:hover {
+    border-color: rgb(206, 215, 219);
+    background-color: white;
+    color: black;
+  }
+
+.select{
+    margin-left: 0.4vw;
+    background-color: black;
+}
+
+html{
+    background-color: black;
+
+}
+
