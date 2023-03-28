@@ -60,7 +60,7 @@ function Base(){
             <div className='header small_header'>using Black-Scholes</div>
         </div>
         <div className='options_row'>
-            <div id='options'>Price: {price.price} {price.currency}</div>
+            <div id='options' className='price'> {price.price} {price.currency}</div>
             <div id='options' className='expiry_content'>
                 <div >Expiry Dates</div>
                 <Expiry 
@@ -75,7 +75,6 @@ function Base(){
                 setIsLoading={handleIsLoading} 
                 onChildResponse={handleExampleResponse}/>
             </div>
-            <div></div>
             <div id='options'>
                 <button 
                 disabled={buttonDisabled} 

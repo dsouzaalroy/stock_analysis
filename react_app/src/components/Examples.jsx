@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Select from "react-select";
+import tickers from '../assets/data.json'
 
 function Examples({onChildResponse, setIsLoading, isLoading}){
     
@@ -20,7 +21,8 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
         }
         return expiryOptions
     }
-    const options = [
+    const options = 
+    [
         { value: 'MSFT', label: 'MSFT' },
         { value: 'AAPL', label: 'AAPL' },
         { value: 'TSLA', label: 'TSLA' },
@@ -55,11 +57,13 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
                 control: (baseStyles, state) => ({
                   ...baseStyles,
                   backgroundColor:state.isDisabled ? '#808080': 'black',
+                  zIndex:9999,
                 }),
                 option: (baseStyles, state) =>({
                     ...baseStyles,
                     backgroundColor:state.isFocused ? 'white': 'black',
                     color:state.isFocused ? 'black': 'white'
+                    
                 }),
                 singleValue: (baseStyles, state) =>({
                     ...baseStyles,
@@ -68,6 +72,7 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
                 menu: (baseStyles, state) =>({
                     ...baseStyles,
                     backgroundColor: 'black',
+                    zIndex:9999,
                 }),
               }}
             />

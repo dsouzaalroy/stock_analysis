@@ -12,6 +12,8 @@
 .table{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 2vw;
     font-family: 'Poppins';
     font-weight: 200;
@@ -46,6 +48,10 @@ div,a{
     // margin-top: auto;
 
 }
+#options.price{
+    font-weight: 300;
+    font-size: 2vw;
+}
 #options{
     margin-left: 5vw;
     margin-right: 5vw;
@@ -55,9 +61,12 @@ div,a{
 
 }
 
+
+
 .call_put{
     margin-right: 2vw;
     font-weight: bold;
+    font-size: 2vw;
 }
 
 .compute_button{

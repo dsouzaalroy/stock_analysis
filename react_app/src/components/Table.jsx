@@ -116,6 +116,7 @@ function Table({options_data}){
                 fontWeight:'300',
                 bgcolor: 'black',
                 borderRadius: 2,
+                zIndex: 0,
 
             }}
           />

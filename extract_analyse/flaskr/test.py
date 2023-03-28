@@ -1,7 +1,17 @@
 import yfinance as yf
+import pandas as pd
+import json
 
-all_stock_data = yf.download(tickers="all", period="5d")
+data = pd.read_csv('/home/alroy/Work/stock_analysis/data.csv')
 
-all_stock_names = all_stock_data.index.get_level_values(0).unique()
+tickers = data['Symbol']
 
-print(all_stock_names)
+data = []
+
+# iterate through the series and add each element to the data list
+for val in tickers:
+    data.append({'value': val, 'label': val})
+
+# write the data to a JSON file
+with open('data.json', 'w') as f:
+    json.dump(data, f)
