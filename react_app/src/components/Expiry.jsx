@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Select from "react-select";
 
 function Expiry({
-    onDateChange, setIsLoading, isLoading, expires = [{value:'', label :''}]
+    onDateChange, isLoading, expires = [{value:'', label :''}]
 }){
         
     const [date, setDate] = useState(true);

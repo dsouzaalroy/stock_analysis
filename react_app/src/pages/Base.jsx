@@ -24,7 +24,7 @@ function Base(){
     }
 
     const getPrice = async (option) =>{
-        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getPrice?name=${option}`)
+        await axios.get(`https://dsouzaalroy.pythonanywhere.com/finance/getPrice?name=${option}`)
             .then((response) =>{
                 setPrice(response.data);
             })
@@ -32,7 +32,7 @@ function Base(){
 
     const getOptionsAnalysis = async () =>{
         setIsLoading(true)
-        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/optionsAnalysis?name=${option}&date=${date}`)
+        await axios.get(`https://dsouzaalroy.pythonanywhere.com/finance/optionsAnalysis?name=${option}&date=${date}`)
         .then((response) =>{
             console.log(response)
             setCalls(response.data.calls)

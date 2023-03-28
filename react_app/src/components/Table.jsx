@@ -1,12 +1,3 @@
-/*
-ask price
-bid price
-callPrice -  Black scholes
-contractSymbol
-volatility
-openInterest
-strike
-*/
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect, useState } from "react";
@@ -24,7 +15,6 @@ function Table({options_data}){
 
     function createRows(){
         const currentRows = [];
-        // console.log("Inside use effect")
         const options_length = Object.keys(options_data.contractSymbol).length;
         for(let i = 0; i < options_length;i++){
             currentRows.push(createOption(

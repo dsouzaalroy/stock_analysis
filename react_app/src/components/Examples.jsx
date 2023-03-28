@@ -21,7 +21,7 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
         return expiryOptions
     }
     const options = [
-        { value: 'BCS', label: 'BCS' },
+        { value: 'MSFT', label: 'MSFT' },
         { value: 'AAPL', label: 'AAPL' },
         { value: 'TSLA', label: 'TSLA' },
     ];
@@ -33,7 +33,7 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
 
     const handlechange = async option =>{
         setIsLoading(true)
-        await axios.get(`http://dsouzaalroy.pythonanywhere.com/finance/getExpiry?name=${option.value}`)
+        await axios.get(`https://dsouzaalroy.pythonanywhere.com/finance/getExpiry?name=${option.value}`)
         .then((response)=>{
             onChildResponse(option.value, createExpiryOptions(response.data))
         })
@@ -45,7 +45,6 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
     return(
         <div>
             <Select 
-            // defaultValue={options[0]}
             placeholder='Ticker'
             options={options}
             onChange={handlechange}
@@ -64,13 +63,11 @@ function Examples({onChildResponse, setIsLoading, isLoading}){
                 }),
                 singleValue: (baseStyles, state) =>({
                     ...baseStyles,
-                    // backgroundColor:'black',
                     color:'white'
                 }),
                 menu: (baseStyles, state) =>({
                     ...baseStyles,
                     backgroundColor: 'black',
-                    // color:state.isFocused ? 'black': 'white'
                 }),
               }}
             />
