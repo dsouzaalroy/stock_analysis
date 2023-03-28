@@ -120,3 +120,4 @@ build/
 *.egg-info/
 
 .idea
+/react_app/build/

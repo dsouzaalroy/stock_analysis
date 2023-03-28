@@ -1,8 +1,8 @@
 import os
+import get_options
 from flask import Flask
 from flask_cors import CORS
-from extract_analyse.flaskr.commons.extensions import cache
-from . import get_options
+from commons.extensions import cache
 
 
 def create_app(test_config=None):

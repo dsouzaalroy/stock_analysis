@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from yahooquery import Ticker
 from scipy.stats import norm
-from extract_analyse.flaskr.commons.extensions import cache
+from commons.extensions import cache
 from flask import (
     Blueprint, jsonify, request
 )
