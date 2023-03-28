@@ -1,6 +1,6 @@
 # Option Pricing App
 
-This is a simple web application that retrieves options data from Yahoo Finance using [yfinance](https://pypi.org/project/yfinance/) and [yahooquery](https://pypi.org/project/yahooquery/1.1.0/), and uses Black-Scholes model to calculate the theoretical call price. The application is built using Flask as the backend and ReactJS as the frontend.
+This is a simple web application that retrieves options data from Yahoo Finance using [yfinance](https://pypi.org/project/yfinance/) and [yahooquery](https://pypi.org/project/yahooquery/1.1.0/), and uses a Black-Scholes model to calculate the theoretical call price. The application is built using Flask as the backend and ReactJS as the frontend.
 Features
 
 * Retrieve options data from Yahoo Finance
